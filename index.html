@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Share Flex Message</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h2>แชร์ Flex Message ให้เพื่อน</h2>
+  <button onclick="shareFlex()">แชร์เลย</button>
+
+  <script>
+    const flexMessage = [
+      {
+        type: "flex",
+        altText: "แนะนำแอป eLibrary โหลดเลย!",
+        contents: {
+          type: "bubble",
+          size: "giga",
+          header: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "image",
+                url: "https://www.afaps.ac.th/subdomain/sed/gallery/picfram/head5.png",
+                aspectRatio: "7:1",
+                align: "center",
+                gravity: "center",
+                aspectMode: "cover",
+                size: "full"
+              }
+            ],
+            paddingAll: "none"
+          },
+          hero: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "box",
+                layout: "vertical",
+                contents: [
+                  {
+                    type: "image",
+                    url: "https://www.afaps.ac.th/subdomain/sed/gallery/picfram/w1.png",
+                    aspectRatio: "129:79",
+                    aspectMode: "fit",
+                    backgroundColor: "#b3baff",
+                    size: "100%"
+                  }
+                ],
+                backgroundColor: "#b3baff",
+                paddingAll: "none",
+                action: {
+                  type: "uri",
+                  label: "อ่านเลย",
+                  uri: "https://elibrary-afapslib.cu-elibrary.com/"
+                },
+                borderColor: "#b3baff",
+                borderWidth: "none"
+              }
+            ],
+            backgroundColor: "#b3baff",
+            borderWidth: "none",
+            action: {
+              type: "uri",
+              label: "action",
+              uri: "https://elibrary-afapslib.cu-elibrary.com/"
+            },
+            maxHeight: "100%"
+          },
+          body: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "image",
+                    url: "https://www.afaps.ac.th/subdomain/sed/gallery/picfram/appstore.png",
+                    size: "md",
+                    action: {
+                      type: "uri",
+                      label: "App Store",
+                      uri: "https://apps.apple.com/th/app/cu-e-library/id1607050195?l=th"
+                    },
+                    align: "center",
+                    aspectRatio: "9:3"
+                  },
+                  {
+                    type: "separator"
+                  },
+                  {
+                    type: "image",
+                    url: "https://www.afaps.ac.th/subdomain/sed/gallery/picfram/manual.png",
+                    size: "md",
+                    aspectRatio: "9:3",
+                    action: {
+                      type: "uri",
+                      label: "คู่มือ",
+                      uri: "https://youtu.be/4JAH4OQVOeo"
+                    },
+                    align: "center"
+                  },
+                  {
+                    type: "separator"
+                  },
+                  {
+                    type: "image",
+                    url: "https://www.afaps.ac.th/subdomain/sed/gallery/picfram/googleplay.png",
+                    size: "md",
+                    aspectRatio: "9:3",
+                    action: {
+                      type: "uri",
+                      label: "Google Play",
+                      uri: "https://play.google.com/store/apps/details?id=hti.cu.elibrary.android&pcampaignid=web_share"
+                    },
+                    align: "center"
+                  }
+                ],
+                justifyContent: "center",
+                offsetBottom: "xs"
+              }
+            ],
+            background: {
+              type: "linearGradient",
+              startColor: "#5656c7",
+              endColor: "#b3baff",
+              angle: "0deg"
+            }
+          },
+          footer: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "image",
+                url: "https://www.afaps.ac.th/subdomain/sed/gallery/picfram/footer2.jpg",
+                align: "center",
+                gravity: "center",
+                aspectMode: "cover",
+                aspectRatio: "1080:50",
+                action: {
+                  type: "uri",
+                  label: "shared",
+                  uri: "https://liff.line.me/2006390864-5gQqgRvw"
+                },
+                size: "full"
+              }
+            ],
+            paddingAll: "none",
+            spacing: "md"
+          }
+        }
+      }
+    ];
+
+    function shareFlex() {
+      liff.init({ liffId: "2006390864-5gQqgRvw" }) // <-- ใส่ LIFF ID ที่นี่
+        .then(() => {
+          if (liff.isApiAvailable('shareTargetPicker')) {
+            liff.shareTargetPicker(flexMessage)
+              .then(() => alert("แชร์สำเร็จ! 🎉"))
+              .catch(err => alert("แชร์ไม่สำเร็จ: " + err));
+          } else {
+            alert("อุปกรณ์ไม่รองรับการแชร์ผ่าน LIFF");
+          }
+        })
+        .catch(err => alert("เกิดข้อผิดพลาดในการโหลด LIFF: " + err));
+    }
+  </script>
+</body>
+</html>
